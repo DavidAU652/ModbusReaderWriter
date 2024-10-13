@@ -20,7 +20,7 @@ client = ModbusTcpClient(IP_ADDRESS, port=PORT)
 connection = client.connect()
 
 if connection:
-    print("Połączono z serwerem Modbus")
+    print("Connected to server")
     
     # Ustawienie jednostki
     client.unit_id = 1
@@ -30,15 +30,15 @@ if connection:
         result = client.read_holding_registers(REGISTER_START, REGISTER_COUNT)
         
         if result.isError():  # Sprawdzanie, czy wystąpił błąd podczas odczytu
-            print(f"Błąd podczas odczytu rejestrów: {result}")
+            print(f"Error when reading: {result}")
         else:
             # Wyświetlanie wartości rejestrów
             for i, value in enumerate(result.registers):
-                print(f"Rejestr {REGISTER_START + i}: {value} (Hex: {hex(value)})")
+                print(f"Register {REGISTER_START + i}: {value} (Hex: {hex(value)})")
     except Exception as e:
-        print(f"Wystąpił błąd: {e}")
+        print(f"Error: {e}")
 else:
-    print("Nie udało się połączyć z serwerem Modbus")
+    print("Error connecting to server")
 
 # Zamknięcie połączenia
 client.close()

@@ -10,19 +10,19 @@ print("")
 # Ustawienia
 IP = input("IP adress: ")
 register = int(input("Register to write: "))
-newValue = int(input("What to write"))
+newValue = int(input("Int to write: "))
 
 # Konfiguracja połączenia
 client = ModbusTcpClient(IP, port=502)
 client.connect()
 
 # Zapis wartości do rejestru
-result = client.write_register(register, newValue, unit=1)
+result = client.write_register(register, newValue)
 
 if result.isError():
-    print("Błąd podczas zapisu do rejestru")
+    print("Error when writing to register")
 else:
-    print(f"Pomyślnie zapisano wartość {newValue} do rejestru {register}")
+    print(f"Succesfuly writed {newValue} to register {register}")
 
 # Zamknięcie połączenia
 client.close()
